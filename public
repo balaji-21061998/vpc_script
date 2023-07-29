@@ -1,0 +1,14 @@
+#!/bin/bash
+# Variables
+VPC_ID="VPC-09a6c9d30150892c7"
+PUBLIC_SUBNET_CIDR="10.0.1.0/24"
+PRIVATE_SUBNET_CIDR="10.0.2.0/24"
+AVAILABILITY_ZONE="us-east-1a"
+# Create public subnet
+PUBLIC_SUBNET_ID=$(aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block $PUBLIC_SUBNET_CIDR --availability-zone $AVAILABILITY_ZONE --query 'Subnet.SubnetId' --output text)
+# Create private subnet
+PRIVATE_SUBNET_ID=$(aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block $PRIVATE_SUBNET_CIDR --availability-zone $AVAILABILITY_ZONE --query 'Subnet.SubnetId' --output text)
+# Print subnet IDs
+echo "Public Subnet ID: $PUBLIC_SUBNET_ID"
+echo "Private Subnet ID: $PRIVATE_SUBNET_ID"
+
